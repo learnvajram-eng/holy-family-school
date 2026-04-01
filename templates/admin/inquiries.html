@@ -1,0 +1,68 @@
+{% extends "admin/base_admin.html" %}
+
+{% block title %}Inquiries{% endblock %}
+{% block page_title %}Admission Inquiries{% endblock %}
+
+{% block content %}
+<div class="section-card">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h6 class="fw-bold mb-0">All Inquiries ({{ inquiries|length }})</h6>
+    <a href="{{ url_for('admin_bp.dashboard') }}" class="btn btn-sm btn-outline-secondary">
+      <i class="bi bi-arrow-left me-1"></i>Dashboard
+    </a>
+  </div>
+
+  {% if inquiries %}
+  <div class="table-responsive">
+    <table class="table table-hover align-middle mb-0">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Student Name</th>
+          <th>Parent Name</th>
+          <th>Class</th>
+          <th>Phone</th>
+          <th>Email</th>
+          <th>Message</th>
+          <th>Date</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for inq in inquiries %}
+        <tr>
+          <td>{{ loop.index }}</td>
+          <td>
+            <strong>{{ inq.student_name }}</strong>
+          </td>
+          <td>{{ inq.parent_name }}</td>
+          <td><span class="badge bg-secondary">{{ inq.class_applying }}</span></td>
+          <td><a href="tel:{{ inq.phone }}">{{ inq.phone }}</a></td>
+          <td>{{ inq.email or '—' }}</td>
+          <td class="text-muted small" style="max-width:180px;">
+            {{ (inq.message or '—')[:60] }}{% if inq.message and inq.message|length > 60 %}…{% endif %}
+          </td>
+          <td class="text-muted small text-nowrap">{{ inq.date.strftime('%d %b %Y') }}</td>
+          <td>
+            <form method="POST" action="{{ url_for('admin_bp.delete_inquiry', id=inq.id) }}"
+                  onsubmit="return confirm('Delete this inquiry?')">
+              {{ csrf_token() if csrf_token is defined }}
+              <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+              <button type="submit" class="btn btn-sm btn-outline-danger">
+                <i class="bi bi-trash"></i>
+              </button>
+            </form>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% else %}
+  <div class="text-center py-5 text-muted">
+    <i class="bi bi-inbox display-4"></i>
+    <p class="mt-3">No inquiries received yet.</p>
+  </div>
+  {% endif %}
+</div>
+{% endblock %}

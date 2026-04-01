@@ -1,0 +1,272 @@
+{% extends "base.html" %}
+
+{% block title %}Admissions – Holy Family English Medium School, Sattenapalli{% endblock %}
+{% block meta_description %}Apply for admission to Holy Family English Medium School, Sattenapalli. Admissions open for LKG to Class X for the 2025-26 academic year.{% endblock %}
+
+{% block content %}
+
+<!-- Page Header with Parallax -->
+<div class="page-header page-header-parallax">
+  <div class="page-header-overlay"></div>
+  <div class="container text-center text-white py-5">
+    <h1 class="page-header-title" data-aos="fade-down">Admissions 2025–26</h1>
+    <nav aria-label="breadcrumb" data-aos="fade-up">
+      <ol class="breadcrumb justify-content-center">
+        <li class="breadcrumb-item"><a href="{{ url_for('main_bp.index') }}">Home</a></li>
+        <li class="breadcrumb-item active">Admissions</li>
+      </ol>
+    </nav>
+  </div>
+</div>
+
+<!-- Admission Scrolling Ticker Banner -->
+<div class="admissions-alert-bar">
+  <div class="admissions-ticker-wrap">
+    <span class="admissions-ticker-label">
+      <i class="bi bi-megaphone-fill me-2"></i>Admissions Open
+    </span>
+    <div class="admissions-ticker-content-wrap">
+      <div class="admissions-ticker-content">
+        <span class="admissions-ticker-item">
+          <i class="bi bi-star-fill me-1"></i> Admissions are now <strong>OPEN</strong> for 2025–26!
+        </span>
+        <span class="admissions-ticker-item">
+          <i class="bi bi-arrow-right-circle-fill me-1"></i> Limited seats available — Apply before March 31st, 2025
+        </span>
+        <span class="admissions-ticker-item">
+          <i class="bi bi-people-fill me-1"></i> Classes LKG to Class X — Enrol your child today!
+        </span>
+        <span class="admissions-ticker-item">
+          <i class="bi bi-telephone-fill me-1"></i> Call us: +91 98765 43210
+        </span>
+        <span class="admissions-ticker-item">
+          <i class="bi bi-star-fill me-1"></i> Admissions are now <strong>OPEN</strong> for 2025–26!
+        </span>
+        <span class="admissions-ticker-item">
+          <i class="bi bi-arrow-right-circle-fill me-1"></i> Limited seats available — Apply before March 31st, 2025
+        </span>
+        <span class="admissions-ticker-item">
+          <i class="bi bi-people-fill me-1"></i> Classes LKG to Class X — Enrol your child today!
+        </span>
+        <span class="admissions-ticker-item">
+          <i class="bi bi-telephone-fill me-1"></i> Call us: +91 98765 43210
+        </span>
+      </div>
+    </div>
+    <a href="#inquiry-form" class="admissions-ticker-btn">Apply Now <i class="bi bi-arrow-right ms-1"></i></a>
+  </div>
+</div>
+
+<!-- Admission Process Steps -->
+<section class="py-5">
+  <div class="container">
+    <div class="section-header text-center mb-5" data-aos="fade-up">
+      <span class="section-tag">How to Apply</span>
+      <h2 class="section-title">Admission Process</h2>
+      <p class="section-sub">Simple, transparent and student-friendly admission process</p>
+    </div>
+
+    <div class="row g-4">
+      {% set steps = [
+        ('01', 'Submit Inquiry', 'Fill the online inquiry form below with student and parent details.', 'bi-clipboard-check-fill'),
+        ('02', 'Document Submission', 'Bring original documents: Birth Certificate, Previous Class Marksheet, Aadhar Card, Transfer Certificate.', 'bi-folder-fill'),
+        ('03', 'Interaction', 'A friendly interaction session with the student and parents to understand needs and fit.', 'bi-chat-dots-fill'),
+        ('04', 'Admission Confirmation', 'Receive confirmation letter and complete fee payment to secure the seat.', 'bi-patch-check-fill'),
+      ] %}
+      {% for num, title, desc, icon in steps %}
+      <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="{{ loop.index0 * 100 }}">
+        <div class="process-card text-center h-100">
+          <div class="process-step-num">{{ num }}</div>
+          <div class="process-icon">
+            <i class="bi {{ icon }}"></i>
+          </div>
+          <h5 class="process-title">{{ title }}</h5>
+          <p class="process-desc">{{ desc }}</p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- Fee Structure -->
+<section class="py-5 bg-light-warm">
+  <div class="container">
+    <div class="section-header text-center mb-5" data-aos="fade-up">
+      <span class="section-tag">Transparency First</span>
+      <h2 class="section-title">Fee Structure 2025–26</h2>
+      <p class="section-sub">All fees are Government-approved and completely transparent</p>
+    </div>
+
+    <div class="row justify-content-center" data-aos="fade-up">
+      <div class="col-lg-9">
+        <div class="table-responsive fee-table-wrap">
+          <table class="table fee-table text-center">
+            <thead>
+              <tr>
+                <th>Class</th>
+                <th>Tuition Fee (Annual)</th>
+                <th>Admission Fee (One-time)</th>
+                <th>Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% set fees = [
+                ('LKG', '₹8,000', '₹2,000', '₹10,000'),
+                ('UKG', '₹8,000', '₹1,500', '₹9,500'),
+                ('Class I – II', '₹9,000', '₹1,500', '₹10,500'),
+                ('Class III – V', '₹10,000', '₹1,500', '₹11,500'),
+                ('Class VI – VII', '₹12,000', '₹2,000', '₹14,000'),
+                ('Class VIII', '₹13,000', '₹2,000', '₹15,000'),
+                ('Class IX – X', '₹15,000', '₹2,500', '₹17,500'),
+              ] %}
+              {% for cls, tuition, admission, total in fees %}
+              <tr>
+                <td><strong>{{ cls }}</strong></td>
+                <td>{{ tuition }}</td>
+                <td>{{ admission }}</td>
+                <td class="text-maroon fw-bold">{{ total }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        <p class="text-muted small mt-2 text-center">
+          <i class="bi bi-info-circle me-1"></i>
+          Fees include textbooks. Bus fees and uniform charges are separate. Installment options available — contact the office.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Important Dates -->
+<section class="py-5">
+  <div class="container">
+    <div class="section-header text-center mb-4" data-aos="fade-up">
+      <span class="section-tag">Key Dates</span>
+      <h2 class="section-title">Important Dates</h2>
+    </div>
+    <div class="row justify-content-center" data-aos="fade-up">
+      <div class="col-lg-7">
+        {% set dates = [
+          ('Jan 15, 2025', 'Admission Forms Available', 'bi-calendar-plus-fill'),
+          ('Mar 31, 2025', 'Last Date for Applications', 'bi-calendar-x-fill'),
+          ('Apr 5–10, 2025', 'Student Interaction Sessions', 'bi-calendar-event-fill'),
+          ('Apr 15, 2025', 'Admission Results Announced', 'bi-calendar-check-fill'),
+          ('Jun 1, 2025', 'New Academic Year Begins', 'bi-calendar2-heart-fill'),
+        ] %}
+        {% for date, event, icon in dates %}
+        <div class="date-item d-flex align-items-center gap-3 mb-3">
+          <div class="date-icon"><i class="bi {{ icon }}"></i></div>
+          <div>
+            <p class="date-date mb-0 fw-bold">{{ date }}</p>
+            <p class="date-event mb-0 text-muted">{{ event }}</p>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Inquiry Form -->
+<section class="py-5 bg-light-warm" id="inquiry-form">
+  <div class="container">
+    <div class="section-header text-center mb-5" data-aos="fade-up">
+      <span class="section-tag">Apply Online</span>
+      <h2 class="section-title">Admission Inquiry Form</h2>
+      <p class="section-sub">Fill in the details below and our admissions team will contact you within 48 hours</p>
+    </div>
+
+    <div class="row justify-content-center">
+      <div class="col-lg-7" data-aos="fade-up">
+        <div class="form-card">
+          <form method="POST" action="{{ url_for('main_bp.admissions') }}#inquiry-form" novalidate>
+            {{ form.hidden_tag() }}
+
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label">{{ form.student_name.label.text }} <span class="text-danger">*</span></label>
+                {{ form.student_name(class="form-control" + (" is-invalid" if form.student_name.errors else ""), placeholder="Student's full name") }}
+                {% if form.student_name.errors %}
+                  <div class="invalid-feedback">{{ form.student_name.errors[0] }}</div>
+                {% endif %}
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label">{{ form.parent_name.label.text }} <span class="text-danger">*</span></label>
+                {{ form.parent_name(class="form-control" + (" is-invalid" if form.parent_name.errors else ""), placeholder="Parent/Guardian name") }}
+                {% if form.parent_name.errors %}
+                  <div class="invalid-feedback">{{ form.parent_name.errors[0] }}</div>
+                {% endif %}
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label">{{ form.class_applying.label.text }} <span class="text-danger">*</span></label>
+                {{ form.class_applying(class="form-select" + (" is-invalid" if form.class_applying.errors else "")) }}
+                {% if form.class_applying.errors %}
+                  <div class="invalid-feedback">{{ form.class_applying.errors[0] }}</div>
+                {% endif %}
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label">{{ form.phone.label.text }} <span class="text-danger">*</span></label>
+                {{ form.phone(class="form-control" + (" is-invalid" if form.phone.errors else ""), placeholder="+91 XXXXX XXXXX") }}
+                {% if form.phone.errors %}
+                  <div class="invalid-feedback">{{ form.phone.errors[0] }}</div>
+                {% endif %}
+              </div>
+
+              <div class="col-12">
+                <label class="form-label">{{ form.email.label.text }}</label>
+                {{ form.email(class="form-control" + (" is-invalid" if form.email.errors else ""), placeholder="parent@email.com (optional)") }}
+                {% if form.email.errors %}
+                  <div class="invalid-feedback">{{ form.email.errors[0] }}</div>
+                {% endif %}
+              </div>
+
+              <div class="col-12">
+                <label class="form-label">{{ form.message.label.text }}</label>
+                {{ form.message(class="form-control" + (" is-invalid" if form.message.errors else ""), rows=3, placeholder="Any specific questions or requirements (optional)") }}
+                {% if form.message.errors %}
+                  <div class="invalid-feedback">{{ form.message.errors[0] }}</div>
+                {% endif %}
+              </div>
+
+              <div class="col-12">
+                <button type="submit" class="btn btn-maroon w-100 py-3 btn-lg">
+                  <i class="bi bi-send-fill me-2"></i>Submit Inquiry
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Sidebar Info -->
+      <div class="col-lg-4 mt-4 mt-lg-0" data-aos="fade-left">
+        <div class="admissions-sidebar">
+          <h5 class="sidebar-heading">Documents Required</h5>
+          <ul class="doc-list">
+            <li><i class="bi bi-file-earmark-check-fill"></i> Birth Certificate</li>
+            <li><i class="bi bi-file-earmark-check-fill"></i> Aadhar Card (Child + Parent)</li>
+            <li><i class="bi bi-file-earmark-check-fill"></i> Previous Class Marksheet/Report Card</li>
+            <li><i class="bi bi-file-earmark-check-fill"></i> Transfer Certificate (if applicable)</li>
+            <li><i class="bi bi-file-earmark-check-fill"></i> Passport-size Photographs (4)</li>
+            <li><i class="bi bi-file-earmark-check-fill"></i> Caste Certificate (if applicable)</li>
+          </ul>
+
+          <div class="contact-box mt-4">
+            <h5 class="sidebar-heading">Need Help?</h5>
+            <p><i class="bi bi-telephone-fill text-gold me-2"></i>+91 98765 43210</p>
+            <p><i class="bi bi-envelope-fill text-gold me-2"></i>admissions@holyfamilysattenapalli.in</p>
+            <p><i class="bi bi-clock-fill text-gold me-2"></i>Mon–Sat: 9 AM – 3 PM</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

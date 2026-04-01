@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>{% block title %}Admin{% endblock %} – HFEMS Admin Panel</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    :root { --maroon: #8B0000; --gold: #FFD700; --sidebar-w: 240px; }
+    body { font-family: 'Lato', sans-serif; background: #f4f5f7; }
+    /* Sidebar */
+    .admin-sidebar { width: var(--sidebar-w); min-height: 100vh; background: var(--maroon); position: fixed; top: 0; left: 0; z-index: 100; display: flex; flex-direction: column; }
+    .sidebar-brand { padding: 1.25rem 1rem; border-bottom: 1px solid rgba(255,255,255,.15); text-align: center; }
+    .sidebar-brand-name { color: #fff; font-weight: 700; font-size: .95rem; margin: 0; }
+    .sidebar-brand-sub { color: rgba(255,255,255,.6); font-size: .75rem; }
+    .sidebar-nav { flex: 1; padding: 1rem 0; }
+    .sidebar-section-label { color: rgba(255,255,255,.4); font-size: .7rem; text-transform: uppercase; letter-spacing: 1px; padding: .5rem 1.25rem .25rem; }
+    .sidebar-link { display: flex; align-items: center; gap: .75rem; padding: .6rem 1.25rem; color: rgba(255,255,255,.75); text-decoration: none; font-size: .9rem; transition: all .2s; border-left: 3px solid transparent; }
+    .sidebar-link:hover, .sidebar-link.active { background: rgba(255,255,255,.1); color: #fff; border-left-color: var(--gold); }
+    .sidebar-link i { font-size: 1.1rem; width: 20px; }
+    .sidebar-badge { margin-left: auto; background: var(--gold); color: #333; font-size: .7rem; font-weight: 700; border-radius: 20px; padding: 1px 7px; }
+    .sidebar-footer { padding: 1rem; border-top: 1px solid rgba(255,255,255,.15); }
+    /* Main */
+    .admin-main { margin-left: var(--sidebar-w); min-height: 100vh; display: flex; flex-direction: column; }
+    .admin-topbar { background: #fff; padding: .75rem 1.5rem; border-bottom: 1px solid #e0e0e0; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 50; }
+    .admin-topbar-title { font-weight: 700; color: var(--maroon); font-size: 1.1rem; margin: 0; }
+    .admin-content { flex: 1; padding: 1.5rem; }
+    /* Cards */
+    .stat-mini-card { background: #fff; border-radius: 10px; padding: 1.25rem; border-left: 4px solid var(--maroon); box-shadow: 0 2px 8px rgba(0,0,0,.06); }
+    .stat-mini-card.gold { border-left-color: var(--gold); }
+    .stat-mini-num { font-size: 2rem; font-weight: 700; color: var(--maroon); }
+    .stat-mini-card.gold .stat-mini-num { color: #b8860b; }
+    .stat-mini-label { color: #888; font-size: .85rem; margin: 0; }
+    .data-table { background: #fff; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,.06); }
+    .data-table .table { margin: 0; }
+    .data-table .table thead th { background: #f8f9fa; font-weight: 600; font-size: .85rem; color: #555; text-transform: uppercase; letter-spacing: .5px; border-bottom: 2px solid #e0e0e0; padding: .85rem 1rem; }
+    .data-table .table td { padding: .75rem 1rem; vertical-align: middle; font-size: .9rem; }
+    .badge-new { background: var(--gold); color: #333; font-size: .7rem; font-weight: 700; }
+    .section-card { background: #fff; border-radius: 10px; padding: 1.25rem; box-shadow: 0 2px 8px rgba(0,0,0,.06); }
+    @media (max-width: 768px) {
+      .admin-sidebar { transform: translateX(-100%); transition: transform .3s; }
+      .admin-sidebar.open { transform: translateX(0); }
+      .admin-main { margin-left: 0; }
+    }
+  </style>
+  {% block extra_css %}{% endblock %}
+</head>
+<body>
+
+<!-- Sidebar -->
+<aside class="admin-sidebar" id="adminSidebar">
+  <div class="sidebar-brand">
+    <img src="/static/images/logo.png" alt="Logo" height="40" style="margin-bottom:6px;"
+         onerror="this.style.display='none'"/>
+    <p class="sidebar-brand-name">HFEMS Admin</p>
+    <p class="sidebar-brand-sub" style="margin:0">Holy Family School</p>
+  </div>
+
+  <nav class="sidebar-nav">
+    <p class="sidebar-section-label">Overview</p>
+    <a href="{{ url_for('admin_bp.dashboard') }}" class="sidebar-link {% if request.endpoint == 'admin_bp.dashboard' %}active{% endif %}">
+      <i class="bi bi-speedometer2"></i> Dashboard
+    </a>
+
+    <p class="sidebar-section-label mt-3">Content</p>
+    <a href="{{ url_for('admin_bp.announcements') }}" class="sidebar-link {% if request.endpoint == 'admin_bp.announcements' %}active{% endif %}">
+      <i class="bi bi-megaphone"></i> Announcements
+    </a>
+    <a href="{{ url_for('admin_bp.gallery') }}" class="sidebar-link {% if request.endpoint == 'admin_bp.gallery' %}active{% endif %}">
+      <i class="bi bi-images"></i> Gallery
+    </a>
+
+    <p class="sidebar-section-label mt-3">Inbox</p>
+    <a href="{{ url_for('admin_bp.inquiries') }}" class="sidebar-link {% if request.endpoint == 'admin_bp.inquiries' %}active{% endif %}">
+      <i class="bi bi-person-lines-fill"></i> Inquiries
+    </a>
+    <a href="{{ url_for('admin_bp.messages') }}" class="sidebar-link {% if request.endpoint == 'admin_bp.messages' %}active{% endif %}">
+      <i class="bi bi-envelope"></i> Messages
+    </a>
+
+    <p class="sidebar-section-label mt-3">Site</p>
+    <a href="{{ url_for('main_bp.index') }}" class="sidebar-link" target="_blank">
+      <i class="bi bi-box-arrow-up-right"></i> View Website
+    </a>
+  </nav>
+
+  <div class="sidebar-footer">
+    <a href="{{ url_for('admin_bp.logout') }}" class="sidebar-link" style="padding-left:0; border:0;">
+      <i class="bi bi-box-arrow-left text-danger"></i>
+      <span class="text-danger">Logout</span>
+    </a>
+  </div>
+</aside>
+
+<!-- Main Content -->
+<div class="admin-main">
+  <!-- Top Bar -->
+  <header class="admin-topbar">
+    <h1 class="admin-topbar-title">{% block page_title %}Dashboard{% endblock %}</h1>
+    <div class="d-flex align-items-center gap-3">
+      <span class="text-muted small d-none d-md-block">
+        <i class="bi bi-person-fill me-1"></i>{{ current_user.username }}
+      </span>
+      <a href="{{ url_for('admin_bp.logout') }}" class="btn btn-sm btn-outline-danger">
+        <i class="bi bi-box-arrow-left me-1"></i>Logout
+      </a>
+    </div>
+  </header>
+
+  <!-- Flash Messages -->
+  <div class="px-3 pt-3">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+  </div>
+
+  <!-- Page Content -->
+  <main class="admin-content">
+    {% block content %}{% endblock %}
+  </main>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+{% block extra_js %}{% endblock %}
+</body>
+</html>

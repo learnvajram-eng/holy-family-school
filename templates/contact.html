@@ -1,0 +1,145 @@
+{% extends "base.html" %}
+
+{% block title %}Contact Us – Holy Family English Medium School, Sattenapalli{% endblock %}
+{% block meta_description %}Contact Holy Family English Medium School, Sattenapalli. Reach us by phone, email or visit us in Palnadu District, Andhra Pradesh.{% endblock %}
+
+{% block content %}
+
+<!-- Page Header -->
+<div class="page-header">
+  <div class="page-header-overlay"></div>
+  <div class="container text-center text-white py-5">
+    <h1 class="page-header-title" data-aos="fade-down">Contact Us</h1>
+    <nav aria-label="breadcrumb" data-aos="fade-up">
+      <ol class="breadcrumb justify-content-center">
+        <li class="breadcrumb-item"><a href="{{ url_for('main_bp.index') }}">Home</a></li>
+        <li class="breadcrumb-item active">Contact</li>
+      </ol>
+    </nav>
+  </div>
+</div>
+
+<!-- Contact Info Cards -->
+<section class="py-5">
+  <div class="container">
+    <div class="row g-4 mb-5">
+      <div class="col-md-4" data-aos="fade-up" data-aos-delay="0">
+        <div class="contact-info-card text-center">
+          <div class="contact-info-icon"><i class="bi bi-geo-alt-fill"></i></div>
+          <h5>Our Address</h5>
+          <p>Holy Family English Medium School<br>
+             Sattenapalli, Palnadu District<br>
+             Andhra Pradesh – 522 403</p>
+        </div>
+      </div>
+      <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+        <div class="contact-info-card text-center">
+          <div class="contact-info-icon"><i class="bi bi-telephone-fill"></i></div>
+          <h5>Phone Numbers</h5>
+          <p>
+            Principal's Office:<br>
+            <a href="tel:+919876543210">+91 98765 43210</a><br><br>
+            Admissions Office:<br>
+            <a href="tel:+919876543211">+91 98765 43211</a>
+          </p>
+        </div>
+      </div>
+      <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+        <div class="contact-info-card text-center">
+          <div class="contact-info-icon"><i class="bi bi-envelope-fill"></i></div>
+          <h5>Email Us</h5>
+          <p>
+            General: <a href="mailto:info@holyfamilysattenapalli.in">info@holyfamilysattenapalli.in</a><br><br>
+            Admissions: <a href="mailto:admissions@holyfamilysattenapalli.in">admissions@holyfamilysattenapalli.in</a>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="row g-5 align-items-start">
+      <!-- Contact Form -->
+      <div class="col-lg-6" data-aos="fade-right">
+        <span class="section-tag">Write to Us</span>
+        <h2 class="section-title mt-2">Send a Message</h2>
+        <p class="text-muted mb-4">Have a question or feedback? Fill in the form and we'll get back to you within 24 hours.</p>
+
+        <div class="form-card">
+          <form method="POST" action="{{ url_for('main_bp.contact') }}" novalidate>
+            {{ form.hidden_tag() }}
+
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label">{{ form.name.label.text }} <span class="text-danger">*</span></label>
+                {{ form.name(class="form-control" + (" is-invalid" if form.name.errors else ""), placeholder="Your full name") }}
+                {% if form.name.errors %}
+                  <div class="invalid-feedback">{{ form.name.errors[0] }}</div>
+                {% endif %}
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label">{{ form.email.label.text }} <span class="text-danger">*</span></label>
+                {{ form.email(class="form-control" + (" is-invalid" if form.email.errors else ""), placeholder="you@email.com") }}
+                {% if form.email.errors %}
+                  <div class="invalid-feedback">{{ form.email.errors[0] }}</div>
+                {% endif %}
+              </div>
+
+              <div class="col-12">
+                <label class="form-label">{{ form.subject.label.text }} <span class="text-danger">*</span></label>
+                {{ form.subject(class="form-control" + (" is-invalid" if form.subject.errors else ""), placeholder="What is this regarding?") }}
+                {% if form.subject.errors %}
+                  <div class="invalid-feedback">{{ form.subject.errors[0] }}</div>
+                {% endif %}
+              </div>
+
+              <div class="col-12">
+                <label class="form-label">{{ form.message.label.text }} <span class="text-danger">*</span></label>
+                {{ form.message(class="form-control" + (" is-invalid" if form.message.errors else ""), rows=5, placeholder="Type your message here...") }}
+                {% if form.message.errors %}
+                  <div class="invalid-feedback">{{ form.message.errors[0] }}</div>
+                {% endif %}
+              </div>
+
+              <div class="col-12">
+                <button type="submit" class="btn btn-maroon w-100 py-3 btn-lg">
+                  <i class="bi bi-send-fill me-2"></i>Send Message
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Map + Info -->
+      <div class="col-lg-6" data-aos="fade-left">
+        <span class="section-tag">Find Us</span>
+        <h2 class="section-title mt-2">Our Location</h2>
+        <p class="text-muted mb-4">Located in the heart of Sattenapalli, easily accessible by road and public transport.</p>
+
+        <!-- Google Map Embed -->
+        <div class="map-wrap rounded overflow-hidden mb-4">
+          <iframe
+            title="Holy Family School Location"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d30698.44!2d80.1528!3d16.3965!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a35a2c9c7c1a2b1%3A0x1234567890abcdef!2sSattenapalli%2C+Andhra+Pradesh!5e0!3m2!1sen!2sin!4v1700000000000"
+            width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div>
+
+        <!-- Office Hours -->
+        <div class="office-hours-card">
+          <h5><i class="bi bi-clock-fill text-gold me-2"></i>Office Hours</h5>
+          <table class="table table-sm mb-0">
+            <tbody>
+              <tr><td>Monday – Friday</td><td class="text-end fw-bold">8:00 AM – 4:30 PM</td></tr>
+              <tr><td>Saturday</td><td class="text-end fw-bold">8:00 AM – 1:00 PM</td></tr>
+              <tr><td>Sunday & Holidays</td><td class="text-end text-muted">Closed</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

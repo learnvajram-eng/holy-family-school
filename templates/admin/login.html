@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Login – Holy Family School</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Lato:wght@400;600&display=swap" rel="stylesheet"/>
+  <style>
+    :root { --maroon: #8B0000; --gold: #FFD700; }
+    body { background: linear-gradient(135deg, #8B0000 0%, #5a0000 100%); min-height: 100vh; display: flex; align-items: center; font-family: 'Lato', sans-serif; }
+    .login-card { background: #fff; border-radius: 16px; padding: 2.5rem; width: 100%; max-width: 420px; box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
+    .school-logo { width: 72px; height: 72px; object-fit: contain; }
+    .logo-placeholder { width: 72px; height: 72px; background: var(--maroon); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 2rem; margin: 0 auto; }
+    .login-title { font-family: 'Playfair Display', serif; color: var(--maroon); font-size: 1.4rem; font-weight: 700; }
+    .login-sub { color: #888; font-size: .9rem; }
+    .form-control:focus { border-color: var(--maroon); box-shadow: 0 0 0 .2rem rgba(139,0,0,.15); }
+    .btn-login { background: var(--maroon); color: #fff; border: none; font-weight: 600; letter-spacing: .5px; transition: background .3s; }
+    .btn-login:hover { background: #a00000; color: #fff; }
+    .divider { border-top: 1px solid #eee; margin: 1.5rem 0; }
+    .back-link { color: #888; text-decoration: none; font-size: .9rem; }
+    .back-link:hover { color: var(--maroon); }
+    .input-group-text { background: #f8f9fa; border-right: 0; }
+    .form-control.br-left-0 { border-left: 0; }
+  </style>
+</head>
+<body>
+<div class="container d-flex justify-content-center align-items-center min-vh-100">
+  <div class="login-card">
+    <!-- Logo + School Name -->
+    <div class="text-center mb-4">
+      <img src="/static/images/logo.png" alt="Logo" class="school-logo mb-2"
+           onerror="this.style.display='none'; document.getElementById('logo-fallback').style.display='flex';" />
+      <div id="logo-fallback" class="logo-placeholder mb-2" style="display:none;">
+        <i class="bi bi-mortarboard-fill"></i>
+      </div>
+      <h1 class="login-title mb-0">Admin Panel</h1>
+      <p class="login-sub">Holy Family English Medium School</p>
+    </div>
+
+    <!-- Flash Messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="alert alert-{{ category }} py-2 mb-3 small">{{ message }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <!-- Login Form -->
+    <form method="POST" action="{{ url_for('admin_bp.login') }}" novalidate>
+      {{ form.hidden_tag() }}
+
+      <div class="mb-3">
+        <label class="form-label fw-semibold">Username</label>
+        <div class="input-group">
+          <span class="input-group-text"><i class="bi bi-person-fill text-muted"></i></span>
+          {{ form.username(class="form-control br-left-0" + (" is-invalid" if form.username.errors else ""), placeholder="Enter username", autocomplete="username") }}
+          {% if form.username.errors %}
+            <div class="invalid-feedback">{{ form.username.errors[0] }}</div>
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="mb-4">
+        <label class="form-label fw-semibold">Password</label>
+        <div class="input-group">
+          <span class="input-group-text"><i class="bi bi-lock-fill text-muted"></i></span>
+          {{ form.password(class="form-control br-left-0" + (" is-invalid" if form.password.errors else ""), placeholder="Enter password", autocomplete="current-password") }}
+          {% if form.password.errors %}
+            <div class="invalid-feedback">{{ form.password.errors[0] }}</div>
+          {% endif %}
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-login w-100 py-2 mb-3">
+        <i class="bi bi-box-arrow-in-right me-2"></i>Sign In
+      </button>
+    </form>
+
+    <div class="divider"></div>
+    <div class="text-center">
+      <a href="{{ url_for('main_bp.index') }}" class="back-link">
+        <i class="bi bi-arrow-left me-1"></i>Back to School Website
+      </a>
+    </div>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

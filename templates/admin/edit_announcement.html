@@ -1,0 +1,41 @@
+{% extends "admin/base_admin.html" %}
+
+{% block title %}Edit Announcement{% endblock %}
+{% block page_title %}Edit Announcement{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-lg-6">
+    <div class="section-card">
+      <h6 class="fw-bold mb-4">Edit Announcement</h6>
+      <form method="POST" action="{{ url_for('admin_bp.edit_announcement', id=ann.id) }}" novalidate>
+        {{ form.hidden_tag() }}
+        <div class="mb-3">
+          <label class="form-label fw-semibold">Title <span class="text-danger">*</span></label>
+          {{ form.title(class="form-control" + (" is-invalid" if form.title.errors else "")) }}
+          {% if form.title.errors %}
+            <div class="invalid-feedback">{{ form.title.errors[0] }}</div>
+          {% endif %}
+        </div>
+        <div class="mb-3">
+          <label class="form-label fw-semibold">Content <span class="text-danger">*</span></label>
+          {{ form.content(class="form-control" + (" is-invalid" if form.content.errors else ""), rows=5) }}
+          {% if form.content.errors %}
+            <div class="invalid-feedback">{{ form.content.errors[0] }}</div>
+          {% endif %}
+        </div>
+        <div class="form-check mb-4">
+          {{ form.active(class="form-check-input") }}
+          <label class="form-check-label">Active (visible on website)</label>
+        </div>
+        <div class="d-flex gap-2">
+          <button type="submit" class="btn px-4" style="background:#8B0000;color:#fff;">
+            <i class="bi bi-check2 me-1"></i>Save Changes
+          </button>
+          <a href="{{ url_for('admin_bp.announcements') }}" class="btn btn-outline-secondary px-4">Cancel</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,204 @@
+{% extends "base.html" %}
+
+{% block title %}Academics – Holy Family English Medium School, Sattenapalli{% endblock %}
+{% block meta_description %}Explore academics at Holy Family English Medium School – classes LKG to X, curriculum, subjects, achievements and timetable.{% endblock %}
+
+{% block content %}
+
+<!-- Page Header -->
+<div class="page-header">
+  <div class="page-header-overlay"></div>
+  <div class="container text-center text-white py-5">
+    <h1 class="page-header-title" data-aos="fade-down">Academics</h1>
+    <nav aria-label="breadcrumb" data-aos="fade-up">
+      <ol class="breadcrumb justify-content-center">
+        <li class="breadcrumb-item"><a href="{{ url_for('main_bp.index') }}">Home</a></li>
+        <li class="breadcrumb-item active">Academics</li>
+      </ol>
+    </nav>
+  </div>
+</div>
+
+<!-- Classes Overview -->
+<section class="py-5" id="classes">
+  <div class="container">
+    <div class="section-header text-center mb-5" data-aos="fade-up">
+      <span class="section-tag">Classes Offered</span>
+      <h2 class="section-title">LKG to Class X</h2>
+      <p class="section-sub">A complete school offering holistic education from nursery through secondary level</p>
+    </div>
+
+    <div class="row g-3">
+      {% set classes = [
+        ('LKG', 'Lower Kindergarten', 'Play-based learning, phonics, numbers, motor skills & social development', 'bi-emoji-smile-fill', 'bg-gold-light'),
+        ('UKG', 'Upper Kindergarten', 'Reading readiness, basic mathematics, environmental awareness & creativity', 'bi-emoji-laughing-fill', 'bg-gold-light'),
+        ('Class I–II', 'Primary (Early)', 'English, Mathematics, EVS, Hindi/Telugu. Foundation of lifelong learning', 'bi-1-circle-fill', 'bg-maroon-light'),
+        ('Class III–V', 'Primary (Upper)', 'Core subjects + General Science, Social Studies, computer basics', 'bi-3-circle-fill', 'bg-maroon-light'),
+        ('Class VI–VIII', 'Middle School', 'Departmental teaching, Science practicals, introduction to formal exams', 'bi-6-circle-fill', 'bg-gold-light'),
+        ('Class IX–X', 'Secondary', 'Board preparation, AP Board curriculum, specialised labs & career guidance', 'bi-9-circle-fill', 'bg-maroon-light'),
+      ] %}
+      {% for cls, label, desc, icon, bg in classes %}
+      <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="{{ loop.index0 * 80 }}">
+        <div class="class-card h-100">
+          <div class="class-icon {{ bg }}">
+            <i class="bi {{ icon }}"></i>
+          </div>
+          <div class="class-body">
+            <h5 class="class-name">{{ cls }}</h5>
+            <p class="class-label text-muted mb-2">{{ label }}</p>
+            <p class="class-desc">{{ desc }}</p>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- Curriculum -->
+<section class="py-5 bg-light-warm" id="curriculum">
+  <div class="container">
+    <div class="section-header text-center mb-5" data-aos="fade-up">
+      <span class="section-tag">What We Teach</span>
+      <h2 class="section-title">Curriculum & Subjects</h2>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-lg-6" data-aos="fade-right">
+        <h4 class="mb-4"><i class="bi bi-book text-maroon me-2"></i>Core Subjects</h4>
+        <div class="subject-grid">
+          {% set subjects = ['English', 'Telugu', 'Hindi', 'Mathematics', 'General Science', 'Physical Science', 'Biological Science', 'Social Studies', 'Computer Science', 'Environmental Studies'] %}
+          {% for sub in subjects %}
+          <div class="subject-tag">
+            <i class="bi bi-check-circle-fill text-gold me-1"></i> {{ sub }}
+          </div>
+          {% endfor %}
+        </div>
+
+        <h4 class="mb-3 mt-5"><i class="bi bi-palette text-maroon me-2"></i>Co-Curricular Activities</h4>
+        <div class="subject-grid">
+          {% set activities = ['Drawing & Painting', 'Music (Vocal)', 'Dance (Classical)', 'Drama & Theatre', 'Yoga', 'Physical Education', 'Moral Science', 'Library Period', 'School Band'] %}
+          {% for act in activities %}
+          <div class="subject-tag subject-tag-alt">
+            <i class="bi bi-star-fill text-gold me-1"></i> {{ act }}
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+
+      <div class="col-lg-6" data-aos="fade-left">
+        <h4 class="mb-4"><i class="bi bi-trophy text-maroon me-2"></i>Sports & Extra-Curricular</h4>
+        <div class="row g-3">
+          {% set sports = [
+            ('Cricket', 'bi-geo-fill'),
+            ('Kabaddi', 'bi-people-fill'),
+            ('Volleyball', 'bi-circle'),
+            ('Athletics', 'bi-lightning-fill'),
+            ('Kho-Kho', 'bi-arrow-repeat'),
+            ('Chess', 'bi-grid-3x3-gap-fill'),
+            ('Carroms', 'bi-circle-half'),
+            ('Football', 'bi-circle-fill'),
+          ] %}
+          {% for sport, icon in sports %}
+          <div class="col-6">
+            <div class="sport-item">
+              <i class="bi {{ icon }} text-maroon"></i>
+              <span>{{ sport }}</span>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+
+        <div class="school-board-card mt-4">
+          <h5><i class="bi bi-award-fill text-gold me-2"></i>Board Affiliation</h5>
+          <p class="mb-1"><strong>Board:</strong> Andhra Pradesh Board of Secondary Education (BSEAP)</p>
+          <p class="mb-1"><strong>Medium:</strong> English Medium</p>
+          <p class="mb-0"><strong>Classes:</strong> LKG to Class X (SSC)</p>
+        </div>
+
+        <a href="#" class="btn btn-maroon mt-4 px-4">
+          <i class="bi bi-download me-2"></i>Download Timetable
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Academic Achievements / Toppers -->
+<section class="py-5" id="achievements">
+  <div class="container">
+    <div class="section-header text-center mb-5" data-aos="fade-up">
+      <span class="section-tag">Our Pride</span>
+      <h2 class="section-title">Academic Achievements</h2>
+      <p class="section-sub">Our students consistently shine at State and District levels</p>
+    </div>
+
+    <!-- Result Stats -->
+    <div class="row g-4 text-center mb-5">
+      <div class="col-6 col-md-3" data-aos="fade-up" data-aos-delay="0">
+        <div class="achievement-stat">
+          <div class="ach-number text-maroon">98%</div>
+          <div class="ach-label">SSC Pass Rate 2023</div>
+        </div>
+      </div>
+      <div class="col-6 col-md-3" data-aos="fade-up" data-aos-delay="100">
+        <div class="achievement-stat">
+          <div class="ach-number text-gold">12</div>
+          <div class="ach-label">Distinctions 2023</div>
+        </div>
+      </div>
+      <div class="col-6 col-md-3" data-aos="fade-up" data-aos-delay="200">
+        <div class="achievement-stat">
+          <div class="ach-number text-maroon">3</div>
+          <div class="ach-label">District Toppers</div>
+        </div>
+      </div>
+      <div class="col-6 col-md-3" data-aos="fade-up" data-aos-delay="300">
+        <div class="achievement-stat">
+          <div class="ach-number text-gold">54+</div>
+          <div class="ach-label">Years of 90%+ Results</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Toppers Grid -->
+    <h4 class="text-center mb-4" data-aos="fade-up">Class X Toppers – 2023</h4>
+    <div class="row g-4 justify-content-center">
+      {% set toppers = [
+        ('Priya Lakshmi', 'GPA 10.0', '1st Rank – District', 'Class X A'),
+        ('Arjun Reddy', 'GPA 9.8', '2nd Rank – District', 'Class X B'),
+        ('Meghana Singh', 'GPA 9.7', '3rd Rank – District', 'Class X A'),
+        ('Rohith Kumar', 'GPA 9.5', 'Science Excellence Award', 'Class X C'),
+      ] %}
+      {% for name, gpa, rank, section in toppers %}
+      <div class="col-6 col-md-3" data-aos="zoom-in" data-aos-delay="{{ loop.index0 * 80 }}">
+        <div class="topper-card text-center">
+          <div class="topper-avatar">
+            <i class="bi bi-person-fill"></i>
+            <div class="topper-rank-badge">{{ loop.index }}</div>
+          </div>
+          <h6 class="topper-name mt-2 mb-0">{{ name }}</h6>
+          <p class="topper-gpa text-gold fw-bold mb-0">{{ gpa }}</p>
+          <p class="topper-rank text-muted small mb-0">{{ rank }}</p>
+          <p class="topper-class text-muted small">{{ section }}</p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- Download Section -->
+<section class="py-5 bg-maroon text-white text-center">
+  <div class="container" data-aos="fade-up">
+    <h3 class="mb-3">Academic Resources</h3>
+    <p class="mb-4">Download our academic calendar, timetable and syllabus overview</p>
+    <div class="d-flex justify-content-center flex-wrap gap-3">
+      <a href="#" class="btn btn-gold px-4"><i class="bi bi-download me-2"></i>Class Timetable</a>
+      <a href="#" class="btn btn-outline-light px-4"><i class="bi bi-download me-2"></i>Academic Calendar</a>
+      <a href="#" class="btn btn-outline-light px-4"><i class="bi bi-download me-2"></i>Syllabus 2024-25</a>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

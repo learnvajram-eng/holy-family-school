@@ -1,0 +1,167 @@
+{% extends "admin/base_admin.html" %}
+
+{% block title %}Dashboard{% endblock %}
+{% block page_title %}Dashboard{% endblock %}
+
+{% block content %}
+
+<!-- Stat Cards -->
+<div class="row g-3 mb-4">
+  <div class="col-6 col-md-3">
+    <div class="stat-mini-card">
+      <div class="d-flex align-items-center justify-content-between">
+        <div>
+          <div class="stat-mini-num">{{ stats.inquiries }}</div>
+          <p class="stat-mini-label">Total Inquiries</p>
+        </div>
+        <i class="bi bi-person-lines-fill fs-2 text-muted opacity-25"></i>
+      </div>
+      {% if stats.new_inquiries > 0 %}
+        <span class="badge badge-new mt-2">{{ stats.new_inquiries }} New</span>
+      {% endif %}
+    </div>
+  </div>
+  <div class="col-6 col-md-3">
+    <div class="stat-mini-card gold">
+      <div class="d-flex align-items-center justify-content-between">
+        <div>
+          <div class="stat-mini-num">{{ stats.messages }}</div>
+          <p class="stat-mini-label">Contact Messages</p>
+        </div>
+        <i class="bi bi-envelope fs-2 text-muted opacity-25"></i>
+      </div>
+      {% if stats.new_messages > 0 %}
+        <span class="badge badge-new mt-2">{{ stats.new_messages }} Unread</span>
+      {% endif %}
+    </div>
+  </div>
+  <div class="col-6 col-md-3">
+    <div class="stat-mini-card">
+      <div class="d-flex align-items-center justify-content-between">
+        <div>
+          <div class="stat-mini-num">{{ stats.announcements }}</div>
+          <p class="stat-mini-label">Announcements</p>
+        </div>
+        <i class="bi bi-megaphone fs-2 text-muted opacity-25"></i>
+      </div>
+    </div>
+  </div>
+  <div class="col-6 col-md-3">
+    <div class="stat-mini-card gold">
+      <div class="d-flex align-items-center justify-content-between">
+        <div>
+          <div class="stat-mini-num">{{ stats.gallery }}</div>
+          <p class="stat-mini-label">Gallery Images</p>
+        </div>
+        <i class="bi bi-images fs-2 text-muted opacity-25"></i>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Quick Actions -->
+<div class="row g-3 mb-4">
+  <div class="col-12">
+    <div class="section-card">
+      <h6 class="fw-bold mb-3 text-muted text-uppercase" style="font-size:.75rem;letter-spacing:.5px;">Quick Actions</h6>
+      <div class="d-flex flex-wrap gap-2">
+        <a href="{{ url_for('admin_bp.announcements') }}" class="btn btn-sm btn-outline-secondary">
+          <i class="bi bi-plus me-1"></i>New Announcement
+        </a>
+        <a href="{{ url_for('admin_bp.gallery') }}" class="btn btn-sm btn-outline-secondary">
+          <i class="bi bi-upload me-1"></i>Upload Image
+        </a>
+        <a href="{{ url_for('admin_bp.inquiries') }}" class="btn btn-sm btn-outline-secondary">
+          <i class="bi bi-person-lines-fill me-1"></i>View Inquiries
+        </a>
+        <a href="{{ url_for('admin_bp.messages') }}" class="btn btn-sm btn-outline-secondary">
+          <i class="bi bi-envelope me-1"></i>View Messages
+        </a>
+        <a href="{{ url_for('main_bp.index') }}" class="btn btn-sm btn-outline-primary" target="_blank">
+          <i class="bi bi-box-arrow-up-right me-1"></i>View Website
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Tables -->
+<div class="row g-4">
+  <!-- Recent Inquiries -->
+  <div class="col-lg-6">
+    <div class="section-card">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h6 class="fw-bold mb-0">Recent Inquiries</h6>
+        <a href="{{ url_for('admin_bp.inquiries') }}" class="btn btn-sm btn-outline-secondary">View All</a>
+      </div>
+      {% if recent_inquiries %}
+      <div class="table-responsive">
+        <table class="table table-sm table-hover mb-0">
+          <thead>
+            <tr>
+              <th>Student</th>
+              <th>Class</th>
+              <th>Phone</th>
+              <th>Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for inq in recent_inquiries %}
+            <tr>
+              <td>
+                {{ inq.student_name }}
+                {% if not inq.is_read %}<span class="badge badge-new ms-1">New</span>{% endif %}
+              </td>
+              <td>{{ inq.class_applying }}</td>
+              <td><a href="tel:{{ inq.phone }}">{{ inq.phone }}</a></td>
+              <td class="text-muted small">{{ inq.date.strftime('%d %b') }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      {% else %}
+      <p class="text-muted text-center py-3 mb-0">No inquiries yet.</p>
+      {% endif %}
+    </div>
+  </div>
+
+  <!-- Recent Messages -->
+  <div class="col-lg-6">
+    <div class="section-card">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h6 class="fw-bold mb-0">Recent Messages</h6>
+        <a href="{{ url_for('admin_bp.messages') }}" class="btn btn-sm btn-outline-secondary">View All</a>
+      </div>
+      {% if recent_messages %}
+      <div class="table-responsive">
+        <table class="table table-sm table-hover mb-0">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Subject</th>
+              <th>Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for msg in recent_messages %}
+            <tr>
+              <td>
+                {{ msg.name }}
+                {% if not msg.is_read %}<span class="badge badge-new ms-1">New</span>{% endif %}
+              </td>
+              <td class="text-truncate" style="max-width:150px;" title="{{ msg.subject }}">{{ msg.subject }}</td>
+              <td class="text-muted small">{{ msg.date.strftime('%d %b') }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      {% else %}
+      <p class="text-muted text-center py-3 mb-0">No messages yet.</p>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+{% endblock %}

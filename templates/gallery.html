@@ -1,0 +1,159 @@
+{% extends "base.html" %}
+
+{% block title %}Gallery – Holy Family English Medium School, Sattenapalli{% endblock %}
+{% block meta_description %}Browse the photo gallery of Holy Family English Medium School, Sattenapalli – events, sports, cultural programs and academic activities.{% endblock %}
+
+{% block extra_css %}
+<style>
+  .gallery-img { cursor: pointer; transition: transform .3s, box-shadow .3s; }
+  .gallery-img:hover { transform: scale(1.03); box-shadow: 0 8px 30px rgba(0,0,0,0.2); }
+  .lightbox-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.92); z-index:9999; align-items:center; justify-content:center; flex-direction:column; }
+  .lightbox-overlay.active { display:flex; }
+  .lightbox-img { max-width:90vw; max-height:80vh; border-radius:8px; }
+  .lightbox-caption { color:#fff; margin-top:12px; font-size:1rem; }
+  .lightbox-close { position:absolute; top:20px; right:30px; font-size:2rem; color:#fff; cursor:pointer; background:none; border:none; }
+  .lightbox-nav { position:absolute; top:50%; transform:translateY(-50%); background:rgba(255,255,255,.15); border:none; color:#fff; font-size:2rem; padding:8px 16px; border-radius:4px; cursor:pointer; }
+  .lightbox-nav:hover { background:rgba(255,255,255,.3); }
+  #lightboxPrev { left:10px; }
+  #lightboxNext { right:10px; }
+</style>
+{% endblock %}
+
+{% block content %}
+
+<!-- Page Header -->
+<div class="page-header">
+  <div class="page-header-overlay"></div>
+  <div class="container text-center text-white py-5">
+    <h1 class="page-header-title" data-aos="fade-down">Gallery</h1>
+    <nav aria-label="breadcrumb" data-aos="fade-up">
+      <ol class="breadcrumb justify-content-center">
+        <li class="breadcrumb-item"><a href="{{ url_for('main_bp.index') }}">Home</a></li>
+        <li class="breadcrumb-item active">Gallery</li>
+      </ol>
+    </nav>
+  </div>
+</div>
+
+<!-- Category Filter -->
+<section class="py-4 bg-light-warm">
+  <div class="container">
+    <div class="d-flex flex-wrap justify-content-center gap-2" data-aos="fade-up">
+      {% for cat in categories %}
+      <a href="{{ url_for('main_bp.gallery', category=cat) }}"
+         class="btn {% if active_category == cat %}btn-maroon{% else %}btn-outline-maroon{% endif %} px-4">
+        {{ cat }}
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- Gallery Grid -->
+<section class="py-5">
+  <div class="container">
+    {% if images %}
+    <div class="row g-3" id="galleryGrid">
+      {% for img in images %}
+      <div class="col-6 col-md-4 col-lg-3" data-aos="zoom-in" data-aos-delay="{{ (loop.index0 % 4) * 80 }}">
+        <div class="gallery-thumb"
+             data-src="{{ url_for('static', filename='images/gallery/' + img.filename) }}"
+             data-caption="{{ img.caption or img.filename }}"
+             data-index="{{ loop.index0 }}">
+          <img src="{{ url_for('static', filename='images/gallery/' + img.filename) }}"
+               alt="{{ img.caption or 'Gallery Image' }}"
+               class="gallery-img img-fluid rounded"
+               loading="lazy"
+               onerror="this.closest('.gallery-thumb').style.display='none'" />
+          <div class="gallery-overlay">
+            <div class="gallery-overlay-content">
+              <i class="bi bi-zoom-in fs-3"></i>
+              {% if img.caption %}<p class="mt-1 small">{{ img.caption }}</p>{% endif %}
+              <span class="gallery-cat-badge">{{ img.category }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    {% else %}
+    <!-- Placeholder gallery when no images uploaded yet -->
+    <div class="text-center py-5" data-aos="fade-up">
+      <div class="gallery-empty">
+        <i class="bi bi-images display-1 text-muted"></i>
+        <h4 class="mt-3 text-muted">Gallery coming soon!</h4>
+        <p class="text-muted">Our team is uploading beautiful moments from school events.<br>Check back soon or follow us on social media.</p>
+      </div>
+    </div>
+
+    <!-- Demo placeholder grid -->
+    <div class="row g-3 mt-4">
+      {% set demo_cats = ['Events', 'Sports', 'Cultural', 'Academics', 'Events', 'Sports', 'Cultural', 'Academics'] %}
+      {% set demo_icons = ['bi-camera-fill', 'bi-trophy-fill', 'bi-music-note-fill', 'bi-book-fill', 'bi-balloon-fill', 'bi-person-running', 'bi-star-fill', 'bi-mortarboard-fill'] %}
+      {% for i in range(8) %}
+      <div class="col-6 col-md-4 col-lg-3" data-aos="zoom-in" data-aos-delay="{{ (i % 4) * 80 }}">
+        <div class="gallery-placeholder-card">
+          <i class="bi {{ demo_icons[i] }}"></i>
+          <p>{{ demo_cats[i] }}</p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </div>
+</section>
+
+<!-- Lightbox -->
+<div class="lightbox-overlay" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
+  <button class="lightbox-close" id="lightboxClose" aria-label="Close">&times;</button>
+  <button class="lightbox-nav" id="lightboxPrev" aria-label="Previous">&#8249;</button>
+  <img src="" alt="" class="lightbox-img" id="lightboxImg" />
+  <p class="lightbox-caption" id="lightboxCaption"></p>
+  <button class="lightbox-nav" id="lightboxNext" aria-label="Next">&#8250;</button>
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const thumbs = Array.from(document.querySelectorAll('.gallery-thumb'));
+  const lightbox = document.getElementById('lightbox');
+  const lbImg   = document.getElementById('lightboxImg');
+  const lbCap   = document.getElementById('lightboxCaption');
+  let current = 0;
+
+  function openLightbox(idx) {
+    current = idx;
+    const thumb = thumbs[idx];
+    lbImg.src = thumb.dataset.src;
+    lbImg.alt = thumb.dataset.caption;
+    lbCap.textContent = thumb.dataset.caption;
+    lightbox.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    lightbox.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  thumbs.forEach((t, i) => t.addEventListener('click', () => openLightbox(i)));
+  document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
+  document.getElementById('lightboxPrev').addEventListener('click', () => openLightbox((current - 1 + thumbs.length) % thumbs.length));
+  document.getElementById('lightboxNext').addEventListener('click', () => openLightbox((current + 1) % thumbs.length));
+
+  lightbox.addEventListener('click', function(e) {
+    if (e.target === lightbox) closeLightbox();
+  });
+
+  document.addEventListener('keydown', function(e) {
+    if (!lightbox.classList.contains('active')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft') openLightbox((current - 1 + thumbs.length) % thumbs.length);
+    if (e.key === 'ArrowRight') openLightbox((current + 1) % thumbs.length);
+  });
+});
+</script>
+{% endblock %}

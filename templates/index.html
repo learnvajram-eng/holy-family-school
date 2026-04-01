@@ -1,0 +1,336 @@
+{% extends "base.html" %}
+
+{% block title %}Holy Family English Medium School, Sattenapalli – Home{% endblock %}
+{% block meta_description %}Welcome to Holy Family English Medium School, Sattenapalli. Providing quality education with Service, Love and Joy since 1970.{% endblock %}
+
+{% block content %}
+
+<!-- ─── Hero Section ──────────────────────────────────────────────────────── -->
+<section class="hero-section" id="hero">
+  <div class="hero-overlay"></div>
+  <div class="container h-100">
+    <div class="row h-100 align-items-center">
+      <div class="col-lg-8 hero-content" data-aos="fade-right" data-aos-duration="1000">
+        <p class="hero-sub-label">Welcome to</p>
+        <h1 class="hero-title">Holy Family<br><span class="text-gold">English Medium School</span></h1>
+        <p class="hero-location"><i class="bi bi-geo-alt-fill me-1"></i> Sattenapalli, Andhra Pradesh</p>
+        <p class="hero-motto">
+          <span class="motto-word">Service</span>
+          <span class="motto-sep">•</span>
+          <span class="motto-word">Love</span>
+          <span class="motto-sep">•</span>
+          <span class="motto-word">Joy</span>
+        </p>
+        <p class="hero-tagline">Nurturing young minds and hearts since 1970. A place where knowledge meets character.</p>
+        <div class="hero-buttons mt-4 d-flex flex-wrap gap-3">
+          <a href="{{ url_for('main_bp.admissions') }}" class="btn btn-gold btn-lg px-5">
+            Apply for Admission <i class="bi bi-arrow-right ms-1"></i>
+          </a>
+          <a href="{{ url_for('main_bp.about') }}" class="btn btn-outline-light btn-lg px-4">
+            Learn More
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scroll Indicator -->
+  <div class="scroll-indicator">
+    <div class="scroll-dot"></div>
+    <span>Scroll Down</span>
+  </div>
+</section>
+
+<!-- ─── Announcement Ticker ───────────────────────────────────────────────── -->
+{% if announcements %}
+<div class="announcement-bar">
+  <div class="container">
+    <div class="d-flex align-items-center">
+      <span class="announcement-label">
+        <i class="bi bi-megaphone-fill me-2"></i>Announcements
+      </span>
+      <div class="ticker-wrapper flex-grow-1">
+        <div class="ticker-content">
+          {% for ann in announcements %}
+            <span class="ticker-item">
+              <i class="bi bi-dot text-gold"></i> {{ ann.title }}: {{ ann.content }}
+            </span>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
+
+<!-- ─── Stats Section ─────────────────────────────────────────────────────── -->
+<section class="stats-section py-5 bg-maroon">
+  <div class="container">
+    <div class="row g-4 text-center text-white">
+      <div class="col-6 col-md-3" data-aos="fade-up" data-aos-delay="0">
+        <div class="stat-card">
+          <div class="stat-icon"><i class="bi bi-people-fill"></i></div>
+          <div class="stat-number" data-target="1200">0</div>
+          <div class="stat-label">Students</div>
+        </div>
+      </div>
+      <div class="col-6 col-md-3" data-aos="fade-up" data-aos-delay="100">
+        <div class="stat-card">
+          <div class="stat-icon"><i class="bi bi-calendar-check-fill"></i></div>
+          <div class="stat-number" data-target="54">0</div>
+          <div class="stat-label">Years of Excellence</div>
+        </div>
+      </div>
+      <div class="col-6 col-md-3" data-aos="fade-up" data-aos-delay="200">
+        <div class="stat-card">
+          <div class="stat-icon"><i class="bi bi-mortarboard-fill"></i></div>
+          <div class="stat-number" data-target="65">0</div>
+          <div class="stat-label">Dedicated Faculty</div>
+        </div>
+      </div>
+      <div class="col-6 col-md-3" data-aos="fade-up" data-aos-delay="300">
+        <div class="stat-card">
+          <div class="stat-icon"><i class="bi bi-trophy-fill"></i></div>
+          <div class="stat-number" data-target="98">0</div>
+          <div class="stat-label">% Pass Rate</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Quick Links ───────────────────────────────────────────────────────── -->
+<section class="quick-links-section py-5">
+  <div class="container">
+    <div class="section-header text-center mb-5" data-aos="fade-up">
+      <span class="section-tag">Explore</span>
+      <h2 class="section-title">Discover Our School</h2>
+      <p class="section-sub">Everything you need to know about Holy Family English Medium School</p>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="0">
+        <a href="{{ url_for('main_bp.admissions') }}" class="quick-link-card text-decoration-none">
+          <div class="ql-icon bg-maroon-light">
+            <i class="bi bi-pencil-square"></i>
+          </div>
+          <h5>Admissions</h5>
+          <p>Enroll your child for 2024–25. Applications open for LKG to Class X.</p>
+          <span class="ql-arrow"><i class="bi bi-arrow-right-circle-fill"></i></span>
+        </a>
+      </div>
+      <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="100">
+        <a href="{{ url_for('main_bp.academics') }}" class="quick-link-card text-decoration-none">
+          <div class="ql-icon bg-gold-light">
+            <i class="bi bi-book-fill"></i>
+          </div>
+          <h5>Academics</h5>
+          <p>Explore our curriculum, subjects and academic achievements from LKG to Class X.</p>
+          <span class="ql-arrow"><i class="bi bi-arrow-right-circle-fill"></i></span>
+        </a>
+      </div>
+      <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="200">
+        <a href="{{ url_for('main_bp.gallery') }}" class="quick-link-card text-decoration-none">
+          <div class="ql-icon bg-maroon-light">
+            <i class="bi bi-images"></i>
+          </div>
+          <h5>Gallery</h5>
+          <p>Browse photos from events, sports days, cultural programs and classroom activities.</p>
+          <span class="ql-arrow"><i class="bi bi-arrow-right-circle-fill"></i></span>
+        </a>
+      </div>
+      <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="300">
+        <a href="{{ url_for('main_bp.contact') }}" class="quick-link-card text-decoration-none">
+          <div class="ql-icon bg-gold-light">
+            <i class="bi bi-chat-dots-fill"></i>
+          </div>
+          <h5>Contact Us</h5>
+          <p>Have questions? Reach out to us and we'll get back to you within 24 hours.</p>
+          <span class="ql-arrow"><i class="bi bi-arrow-right-circle-fill"></i></span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Why Choose Us ─────────────────────────────────────────────────────── -->
+<section class="why-section py-5 bg-light-warm">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-6" data-aos="fade-right">
+        <div class="why-image-block">
+          <div class="why-image-placeholder">
+            <i class="bi bi-building"></i>
+            <span>Holy Family School Campus</span>
+          </div>
+          <div class="why-badge">
+            <span class="badge-number">54+</span>
+            <span class="badge-text">Years of<br>Excellence</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6" data-aos="fade-left">
+        <span class="section-tag">Our Promise</span>
+        <h2 class="section-title mt-2">Why Holy Family School?</h2>
+        <p class="lead-text">We believe every child deserves a nurturing environment that balances academic rigor with the values of service, love, and joy.</p>
+
+        <div class="why-list mt-4">
+          <div class="why-item">
+            <div class="why-icon"><i class="bi bi-check2-circle"></i></div>
+            <div>
+              <h6>Holistic Education</h6>
+              <p>Beyond academics — sports, arts, music and character formation are integral to our programme.</p>
+            </div>
+          </div>
+          <div class="why-item">
+            <div class="why-icon"><i class="bi bi-check2-circle"></i></div>
+            <div>
+              <h6>Experienced Faculty</h6>
+              <p>65+ dedicated teachers with deep subject expertise and genuine care for each student.</p>
+            </div>
+          </div>
+          <div class="why-item">
+            <div class="why-icon"><i class="bi bi-check2-circle"></i></div>
+            <div>
+              <h6>Safe & Inclusive Campus</h6>
+              <p>A welcoming environment where every child belongs and every voice is heard.</p>
+            </div>
+          </div>
+          <div class="why-item">
+            <div class="why-icon"><i class="bi bi-check2-circle"></i></div>
+            <div>
+              <h6>Proven Track Record</h6>
+              <p>Consistently 98%+ Board results with state-level toppers every year.</p>
+            </div>
+          </div>
+        </div>
+
+        <a href="{{ url_for('main_bp.about') }}" class="btn btn-maroon mt-3 px-4">
+          Read Our Story <i class="bi bi-arrow-right ms-1"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Core Values ───────────────────────────────────────────────────────── -->
+<section class="values-section py-5">
+  <div class="container">
+    <div class="section-header text-center mb-5" data-aos="fade-up">
+      <span class="section-tag">Our Motto</span>
+      <h2 class="section-title">Service • Love • Joy</h2>
+      <p class="section-sub">Three words that define everything we do at Holy Family School</p>
+    </div>
+
+    <div class="row g-4 justify-content-center">
+      <div class="col-md-4" data-aos="fade-up" data-aos-delay="0">
+        <div class="value-card value-card-service text-center">
+          <div class="value-icon"><i class="bi bi-heart-fill"></i></div>
+          <h3 class="value-title">Service</h3>
+          <p>We train students to be responsible citizens who serve their community with humility and compassion, following the example of the Holy Family.</p>
+        </div>
+      </div>
+      <div class="col-md-4" data-aos="fade-up" data-aos-delay="150">
+        <div class="value-card value-card-love text-center">
+          <div class="value-icon"><i class="bi bi-stars"></i></div>
+          <h3 class="value-title">Love</h3>
+          <p>Our classrooms are built on unconditional love and acceptance. Every student is seen, valued and encouraged to reach their full potential.</p>
+        </div>
+      </div>
+      <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+        <div class="value-card value-card-joy text-center">
+          <div class="value-icon"><i class="bi bi-sun-fill"></i></div>
+          <h3 class="value-title">Joy</h3>
+          <p>Learning should be a joyful experience. We foster curiosity, creativity and a lifelong love of learning in every student we nurture.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Testimonials ──────────────────────────────────────────────────────── -->
+<section class="testimonials-section py-5 bg-maroon">
+  <div class="container">
+    <div class="section-header text-center mb-5 text-white" data-aos="fade-up">
+      <span class="section-tag-light">What Parents Say</span>
+      <h2 class="section-title text-white">Trusted by Families</h2>
+    </div>
+
+    <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel" data-aos="fade-up">
+      <div class="carousel-inner">
+
+        <div class="carousel-item active">
+          <div class="testimonial-card mx-auto">
+            <div class="testimonial-quote"><i class="bi bi-quote"></i></div>
+            <p class="testimonial-text">"Holy Family School has been a blessing for our family. My daughter has grown so much — not just academically but as a compassionate human being. The teachers truly care."</p>
+            <div class="testimonial-author">
+              <div class="author-avatar"><i class="bi bi-person-fill"></i></div>
+              <div>
+                <strong>Lakshmi Prasad</strong>
+                <span>Parent of Class VIII student</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="carousel-item">
+          <div class="testimonial-card mx-auto">
+            <div class="testimonial-quote"><i class="bi bi-quote"></i></div>
+            <p class="testimonial-text">"The school's holistic approach to education is remarkable. My son loves coming to school every day. The balance of academics and co-curricular activities is perfect."</p>
+            <div class="testimonial-author">
+              <div class="author-avatar"><i class="bi bi-person-fill"></i></div>
+              <div>
+                <strong>Ravi Kumar Reddy</strong>
+                <span>Parent of Class V student</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="carousel-item">
+          <div class="testimonial-card mx-auto">
+            <div class="testimonial-quote"><i class="bi bi-quote"></i></div>
+            <p class="testimonial-text">"Our children scored distinction in Board exams. The teachers' dedication and personal attention made all the difference. We are proud HFEMS alumni parents!"</p>
+            <div class="testimonial-author">
+              <div class="author-avatar"><i class="bi bi-person-fill"></i></div>
+              <div>
+                <strong>Anitha Srinivas</strong>
+                <span>Parent of Class X topper</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="carousel-controls mt-4 text-center">
+        <button class="carousel-btn me-2" data-bs-target="#testimonialCarousel" data-bs-slide="prev">
+          <i class="bi bi-chevron-left"></i>
+        </button>
+        <button class="carousel-btn" data-bs-target="#testimonialCarousel" data-bs-slide="next">
+          <i class="bi bi-chevron-right"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CTA Banner ────────────────────────────────────────────────────────── -->
+<section class="cta-section py-5">
+  <div class="container">
+    <div class="cta-card text-center" data-aos="zoom-in">
+      <h2 class="cta-title">Admissions Open for 2024–25</h2>
+      <p class="cta-sub">Limited seats available. Don't miss the opportunity to give your child the Holy Family advantage.</p>
+      <div class="d-flex justify-content-center flex-wrap gap-3 mt-4">
+        <a href="{{ url_for('main_bp.admissions') }}" class="btn btn-gold btn-lg px-5">
+          Apply Now <i class="bi bi-arrow-right ms-1"></i>
+        </a>
+        <a href="{{ url_for('main_bp.contact') }}" class="btn btn-outline-maroon btn-lg px-4">
+          Contact Us
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

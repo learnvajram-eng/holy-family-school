@@ -1,0 +1,188 @@
+{% extends "base.html" %}
+
+{% block title %}About Us – Holy Family English Medium School, Sattenapalli{% endblock %}
+{% block meta_description %}Learn about Holy Family English Medium School's history, vision, mission, principal's message, and dedicated faculty in Sattenapalli, Andhra Pradesh.{% endblock %}
+
+{% block content %}
+
+<!-- Page Header -->
+<div class="page-header">
+  <div class="page-header-overlay"></div>
+  <div class="container text-center text-white py-5">
+    <h1 class="page-header-title" data-aos="fade-down">About Our School</h1>
+    <nav aria-label="breadcrumb" data-aos="fade-up">
+      <ol class="breadcrumb justify-content-center">
+        <li class="breadcrumb-item"><a href="{{ url_for('main_bp.index') }}">Home</a></li>
+        <li class="breadcrumb-item active">About Us</li>
+      </ol>
+    </nav>
+  </div>
+</div>
+
+<!-- Principal's Message -->
+<section class="py-5">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-4 text-center" data-aos="fade-right">
+        <div class="principal-photo-wrap">
+          <div class="principal-photo-placeholder">
+            <i class="bi bi-person-fill"></i>
+          </div>
+          <div class="principal-info mt-3">
+            <h5 class="mb-0">Rev. Sr. Mary Thomas</h5>
+            <p class="text-muted mb-0">Principal</p>
+            <p class="text-muted small">Holy Family English Medium School</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-8" data-aos="fade-left">
+        <span class="section-tag">Principal's Message</span>
+        <h2 class="section-title mt-2">A Word from Our Principal</h2>
+        <div class="principal-message">
+          <p class="lead">"Dear Parents and Students,</p>
+          <p>Welcome to Holy Family English Medium School — a place where every child's journey is met with care, encouragement, and a deep commitment to excellence.</p>
+          <p>At Holy Family, we believe education is far more than the mastery of subjects. It is about forming young people of integrity — individuals who will go out into the world with courage, compassion, and a sense of purpose.</p>
+          <p>Our motto, <strong>Service, Love and Joy</strong>, is not merely written on our walls; it lives in the hearts of our teachers, staff and students every single day. We strive to create an environment where learning is joyful, relationships are meaningful, and every child feels they truly belong.</p>
+          <p>I invite you to walk with us on this beautiful journey of growth and discovery. Together, we will build a future worthy of every child in our care."</p>
+          <p class="mt-3"><strong>– Rev. Sr. Mary Thomas</strong><br><em>Principal, Holy Family English Medium School</em></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- History & Vision -->
+<section class="py-5 bg-light-warm">
+  <div class="container">
+    <div class="row g-5">
+      <div class="col-lg-6" data-aos="fade-right">
+        <span class="section-tag">Our Story</span>
+        <h2 class="section-title mt-2">History & Legacy</h2>
+        <p>Holy Family English Medium School was established in <strong>1970</strong> by the Franciscan Sisters of the Immaculate Heart of Mary, with a vision to provide quality English-medium education to the children of Sattenapalli and the surrounding region.</p>
+        <p>From humble beginnings with fewer than 100 students, the school has grown into one of the most respected educational institutions in Palnadu District, serving over 1,200 students from LKG to Class X.</p>
+        <p>Over five decades, we have celebrated thousands of graduates who carry our motto of Service, Love and Joy into every corner of society — as doctors, engineers, teachers, entrepreneurs and public servants.</p>
+
+        <div class="timeline mt-4">
+          <div class="timeline-item">
+            <div class="timeline-year">1970</div>
+            <div class="timeline-content">School founded by Franciscan Sisters with 80 students</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-year">1985</div>
+            <div class="timeline-content">First Class X Board batch achieves 100% result</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-year">2000</div>
+            <div class="timeline-content">New science and computer labs established</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-year">2015</div>
+            <div class="timeline-content">Digital classrooms and library expansion</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-year">2024</div>
+            <div class="timeline-content">54 years of nurturing excellence — still growing</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-6" data-aos="fade-left">
+        <span class="section-tag">Our Purpose</span>
+        <h2 class="section-title mt-2">Vision & Mission</h2>
+
+        <div class="vision-card mb-4">
+          <div class="vision-icon"><i class="bi bi-eye-fill"></i></div>
+          <h5>Our Vision</h5>
+          <p>To be a premier educational institution that holistically develops young minds — academically excellent, morally strong, socially responsible — inspired by the values of the Holy Family.</p>
+        </div>
+
+        <div class="mission-card">
+          <div class="mission-icon"><i class="bi bi-bullseye"></i></div>
+          <h5>Our Mission</h5>
+          <ul class="mission-list">
+            <li>Provide quality, inclusive English-medium education accessible to all children</li>
+            <li>Foster intellectual curiosity and a lifelong love of learning</li>
+            <li>Develop character, empathy, and ethical leadership in every student</li>
+            <li>Create a joyful, safe learning environment anchored in Service, Love and Joy</li>
+            <li>Equip students with 21st-century skills for a rapidly changing world</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Core Values -->
+<section class="py-5">
+  <div class="container">
+    <div class="section-header text-center mb-5" data-aos="fade-up">
+      <span class="section-tag">What We Stand For</span>
+      <h2 class="section-title">Our Core Values</h2>
+    </div>
+    <div class="row g-4">
+      <div class="col-md-4" data-aos="fade-up" data-aos-delay="0">
+        <div class="value-card value-card-service text-center">
+          <div class="value-icon"><i class="bi bi-heart-fill"></i></div>
+          <h4 class="value-title">Service</h4>
+          <p>Selfless service to the community. We teach students that true greatness lies in lifting others.</p>
+        </div>
+      </div>
+      <div class="col-md-4" data-aos="fade-up" data-aos-delay="150">
+        <div class="value-card value-card-love text-center">
+          <div class="value-icon"><i class="bi bi-stars"></i></div>
+          <h4 class="value-title">Love</h4>
+          <p>An environment of love and respect where every child is celebrated and no one is left behind.</p>
+        </div>
+      </div>
+      <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+        <div class="value-card value-card-joy text-center">
+          <div class="value-icon"><i class="bi bi-sun-fill"></i></div>
+          <h4 class="value-title">Joy</h4>
+          <p>A joyful school where curiosity is ignited, creativity is celebrated and every day is meaningful.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Faculty Section -->
+<section class="py-5 bg-light-warm" id="faculty">
+  <div class="container">
+    <div class="section-header text-center mb-5" data-aos="fade-up">
+      <span class="section-tag">Our Team</span>
+      <h2 class="section-title">Faculty & Staff</h2>
+      <p class="section-sub">65+ dedicated professionals committed to every student's success</p>
+    </div>
+
+    <div class="row g-4">
+      {% set faculty = [
+        ('Rev. Sr. Mary Thomas', 'Principal', 'M.Ed., M.Phil.', 'bi-person-badge-fill'),
+        ('Mr. Suresh Babu', 'Vice Principal & Mathematics', 'M.Sc., B.Ed.', 'bi-person-fill'),
+        ('Mrs. Padmaja Rao', 'Head of English Dept.', 'M.A. English, B.Ed.', 'bi-person-fill'),
+        ('Mr. Raju Naidu', 'Head of Science Dept.', 'M.Sc. Physics, B.Ed.', 'bi-person-fill'),
+        ('Mrs. Sujatha Devi', 'Head of Social Studies', 'M.A. History, B.Ed.', 'bi-person-fill'),
+        ('Mr. Kishore Kumar', 'Physical Education', 'M.P.Ed.', 'bi-person-fill'),
+        ('Mrs. Annapurna', 'Head of Telugu Dept.', 'M.A. Telugu, B.Ed.', 'bi-person-fill'),
+        ('Mr. Venkat Rao', 'Computer Science', 'MCA, B.Ed.', 'bi-person-fill'),
+      ] %}
+      {% for name, role, qual, icon in faculty %}
+      <div class="col-6 col-md-4 col-lg-3" data-aos="fade-up" data-aos-delay="{{ loop.index0 * 50 }}">
+        <div class="faculty-card text-center">
+          <div class="faculty-photo">
+            <i class="bi {{ icon }}"></i>
+          </div>
+          <h6 class="faculty-name mt-3 mb-0">{{ name }}</h6>
+          <p class="faculty-role text-maroon mb-0">{{ role }}</p>
+          <p class="faculty-qual text-muted small">{{ qual }}</p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <div class="text-center mt-4 text-muted" data-aos="fade-up">
+      <p><i class="bi bi-info-circle me-1"></i> Showing key faculty. Our full team of 65+ educators is dedicated to student success.</p>
+    </div>
+  </div>
+</section>
+
+{% endblock %}
